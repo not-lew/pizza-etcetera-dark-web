@@ -44,7 +44,7 @@ const About = () => {
             <Card className="overflow-hidden bg-black border-pizza-wine sm:col-span-2">
               <CardContent className="p-0">
                 <img 
-                  src="https://images.unsplash.com/photo-1617424771170-d333ef3d0897?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                  src="https://www.smartfire.pt/wp-content/uploads/2020/04/cozinhar-em-forno-a-lenha.jpg" 
                   alt="Forno a lenha tradicional"
                   className="w-full h-64 object-cover"
                 />

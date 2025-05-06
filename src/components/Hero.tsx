@@ -11,11 +11,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const heroImages = [
   {
-    src: "/images/hero-pizza.jpg",
-    alt: "Pizza deliciosa com ingredientes frescos"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80",
+    src: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80",
     alt: "Pizza margherita com manjericão"
   },
   {
@@ -23,7 +19,7 @@ const heroImages = [
     alt: "Pizza rústica com ingredientes gourmet"
   },
   {
-    src: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80",
+    src: "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80",
     alt: "Pizza gourmet com rúcula e tomates cherry"
   }
 ];
