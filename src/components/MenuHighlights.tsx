@@ -25,36 +25,36 @@ const highlightItems = [
 
 const MenuHighlights = () => {
   return (
-    <section className="py-16 bg-black">
+    <section className="py-12 md:py-16 bg-black">
       <div className="container mx-auto px-4">
-        <h2 className="section-heading mb-10">Destaques do Cardápio</h2>
+        <h2 className="section-heading text-2xl md:text-3xl lg:text-4xl mb-6 md:mb-10">Destaques do Cardápio</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {highlightItems.map((item, index) => (
             <Card 
               key={index} 
               className="bg-gray-900 border-gray-800 overflow-hidden animate-fade-in opacity-0"
               style={{ animationDelay: `${0.2 * (index + 1)}s` }}
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-36 sm:h-40 md:h-48 overflow-hidden">
                 <img 
                   src={item.image} 
                   alt={item.name}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
-                <div className="absolute top-0 right-0 bg-pizza-wine text-white px-3 py-1 rounded-bl-lg font-bold">
+                <div className="absolute top-0 right-0 bg-pizza-wine text-white px-2 py-1 md:px-3 md:py-1 rounded-bl-lg font-bold text-sm md:text-base">
                   {item.price.split('/')[0]}
                 </div>
                 {item.isVegan && (
-                  <div className="absolute bottom-0 left-0 bg-green-700 text-white px-3 py-1 rounded-tr-lg">
+                  <div className="absolute bottom-0 left-0 bg-green-700 text-white px-2 py-1 md:px-3 md:py-1 rounded-tr-lg text-sm md:text-base">
                     🥬 Vegetariana
                   </div>
                 )}
               </div>
               
-              <CardContent className="p-4">
-                <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
-                <p className="text-gray-400 text-sm">{item.description}</p>
+              <CardContent className="p-3 md:p-4">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">{item.name}</h3>
+                <p className="text-xs md:text-sm text-gray-400">{item.description}</p>
               </CardContent>
             </Card>
           ))}

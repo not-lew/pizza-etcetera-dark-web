@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 type MenuItem = {
   name: string;
@@ -224,20 +225,21 @@ const menuData: MenuCategory[] = [
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState('Pizzas Clássicas');
+  const isMobile = useIsMobile();
 
   return (
-    <section id="menu" className="py-20 bg-black">
-      <div className="container mx-auto px-4">
-        <h2 className="section-heading">Cardápio</h2>
+    <section id="menu" className="py-12 md:py-20 bg-black">
+      <div className="container mx-auto">
+        <h2 className="section-heading text-2xl md:text-3xl lg:text-4xl mb-6 md:mb-8">Cardápio</h2>
         
-        <div className="overflow-x-auto mb-8">
-          <div className="flex space-x-2 md:space-x-4 min-w-max">
+        <div className="overflow-x-auto mb-6 md:mb-8 -mx-4 px-4">
+          <div className="flex space-x-2 md:space-x-4 min-w-max pb-2">
             {menuData.map((category) => (
               <button
                 key={category.name}
                 onClick={() => setActiveCategory(category.name)}
                 className={cn(
-                  "px-4 py-2 text-sm md:text-base rounded-md transition-colors duration-300",
+                  "px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm lg:text-base rounded-md transition-colors duration-300",
                   activeCategory === category.name
                     ? "bg-pizza-wine text-white"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700"
@@ -249,7 +251,7 @@ const Menu = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {menuData
             .find((category) => category.name === activeCategory)
             ?.items.map((item, index) => (
@@ -258,26 +260,26 @@ const Menu = () => {
                 className="menu-item rounded-lg bg-gray-900"
               >
                 <div className="flex justify-between items-start">
-                  <h3 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                  <h3 className="text-base md:text-lg font-bold text-white mb-1 flex items-center gap-1 md:gap-2">
                     {item.name}
-                    {item.isVegan && <span title="Vegetariano">🥬</span>}
-                    {item.isSpicy && <span title="Picante">🔥</span>}
+                    {item.isVegan && <span title="Vegetariano" className="text-sm md:text-base">🥬</span>}
+                    {item.isSpicy && <span title="Picante" className="text-sm md:text-base">🔥</span>}
                   </h3>
                   {item.price && (
-                    <span className="text-pizza-gold font-semibold whitespace-nowrap">
+                    <span className="text-pizza-gold font-semibold whitespace-nowrap text-xs md:text-sm">
                       {item.price}
                     </span>
                   )}
                 </div>
-                <p className="text-gray-400 text-sm">{item.ingredients}</p>
+                <p className="text-gray-400 text-xs md:text-sm">{item.ingredients}</p>
               </div>
             ))}
         </div>
         
-        <div className="mt-10 text-center">
+        <div className="mt-8 md:mt-10 text-center">
           <a 
             href="tel:913850423"
-            className="inline-block bg-pizza-wine hover:bg-red-800 text-white px-6 py-3 rounded-md transition-all duration-300 hover:scale-105"
+            className="inline-block bg-pizza-wine hover:bg-red-800 text-white px-5 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 hover:scale-105 text-sm md:text-base"
           >
             Ligue e encomende já: 913 850 423
           </a>

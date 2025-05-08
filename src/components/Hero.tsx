@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const heroImages = [
   {
@@ -26,6 +27,7 @@ const heroImages = [
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
+  const isMobile = useIsMobile();
   
   // Automatically rotate carousel images
   useEffect(() => {
@@ -39,7 +41,7 @@ const Hero = () => {
   return (
     <section 
       id="home"
-      className="relative min-h-screen flex items-center justify-center"
+      className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center"
     >
       {/* Background Image Carousel with overlay */}
       <div className="absolute inset-0 z-0">
@@ -61,23 +63,27 @@ const Hero = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-4 z-20 bg-black/50 hover:bg-pizza-wine text-white" />
-          <CarouselNext className="right-4 z-20 bg-black/50 hover:bg-pizza-wine text-white" />
+          {!isMobile && (
+            <>
+              <CarouselPrevious className="left-4 z-20 bg-black/50 hover:bg-pizza-wine text-white" />
+              <CarouselNext className="right-4 z-20 bg-black/50 hover:bg-pizza-wine text-white" />
+            </>
+          )}
         </Carousel>
       </div>
       
       {/* Content overlay */}
       <div className="container mx-auto px-4 text-center z-10 relative">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white animate-fade-in opacity-0" style={{ animationDelay: '0.3s' }}>
+          <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 text-white animate-fade-in opacity-0" style={{ animationDelay: '0.3s' }}>
             Sabor que apaixona.<br />Pizzas que conquistam.
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200 mb-10 animate-fade-in opacity-0" style={{ animationDelay: '0.6s' }}>
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-10 animate-fade-in opacity-0" style={{ animationDelay: '0.6s' }}>
             Descubra nossas receitas artesanais com ingredientes frescos e muito amor.
           </p>
           <a 
             href="tel:913850423"
-            className="bg-pizza-wine hover:bg-red-800 text-white text-lg px-8 py-4 rounded-md transition-transform duration-300 hover:scale-105 inline-block animate-fade-in opacity-0"
+            className="bg-pizza-wine hover:bg-red-800 text-white text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-md transition-transform duration-300 hover:scale-105 inline-block animate-fade-in opacity-0"
             style={{ animationDelay: '0.9s' }}
           >
             Ligue e encomende já: 913 850 423
