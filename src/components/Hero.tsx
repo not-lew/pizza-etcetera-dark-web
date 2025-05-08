@@ -9,23 +9,31 @@ import {
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+// Using more reliable image URLs with fallbacks
 const heroImages = [
   {
     src: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80",
+    fallbackSrc: "https://ik.imagekit.io/lovvxgjvw/pizza-1.jpg",
     alt: "Pizza margherita com manjericão"
   },
   {
-    src: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80",
+    src: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80", 
+    fallbackSrc: "https://ik.imagekit.io/lovvxgjvw/pizza-2.jpg",
     alt: "Pizza rústica com ingredientes gourmet"
   },
   {
     src: "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80",
+    fallbackSrc: "https://ik.imagekit.io/lovvxgjvw/pizza-3.jpg",
     alt: "Pizza gourmet com rúcula e tomates cherry"
   }
 ];
 
+// Default fallback image
+const DEFAULT_FALLBACK = "https://ik.imagekit.io/lovvxgjvw/pizza-default.jpg";
+
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
+  const [imageErrors, setImageErrors] = useState<{[key: number]: boolean}>({});
   const isMobile = useIsMobile();
   
   // Automatically rotate carousel images
@@ -37,6 +45,20 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Handle image load error
+  const handleImageError = (index: number) => {
+    console.log("Image failed to load:", index);
+    setImageErrors(prev => ({...prev, [index]: true}));
+  };
+
+  // Get correct source for an image (with fallback)
+  const getImageSrc = (image: typeof heroImages[0], index: number) => {
+    if (imageErrors[index]) {
+      return image.fallbackSrc || DEFAULT_FALLBACK;
+    }
+    return image.src;
+  };
+
   return (
     <section 
       id="home"
@@ -47,13 +69,14 @@ const Hero = () => {
         <Carousel opts={{ loop: true }} className="w-full h-full">
           <CarouselContent className="h-full">
             {heroImages.map((image, index) => (
-              <CarouselItem key={index} className="h-full">
+              <CarouselItem key={index} className="h-full w-full">
                 <div className="relative h-full w-full">
                   <img 
-                    src={image.src}
+                    src={getImageSrc(image, index)}
                     alt={image.alt}
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{ filter: 'brightness(0.3)' }}
+                    onError={() => handleImageError(index)}
                   />
                 </div>
               </CarouselItem>
