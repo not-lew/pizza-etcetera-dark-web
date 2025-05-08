@@ -7,7 +7,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const heroImages = [
@@ -44,22 +43,19 @@ const Hero = () => {
       className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center"
     >
       {/* Background Image Carousel with overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <Carousel opts={{ loop: true }} className="w-full h-full">
           <CarouselContent className="h-full">
             {heroImages.map((image, index) => (
               <CarouselItem key={index} className="h-full">
-                <AspectRatio ratio={16/9} className="h-full">
-                  <div className="relative h-full">
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center z-0"
-                      style={{ 
-                        backgroundImage: `url(${image.src})`,
-                        filter: 'brightness(0.3)'
-                      }}
-                    ></div>
-                  </div>
-                </AspectRatio>
+                <div className="relative h-full w-full">
+                  <img 
+                    src={image.src}
+                    alt={image.alt}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ filter: 'brightness(0.3)' }}
+                  />
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
